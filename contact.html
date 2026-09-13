@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>お問い合わせ｜TANOMATO</title>
+<meta name="description" content="札幌・北海道の店舗と小規模事業向けWeb制作。構成・文章整理・デザイン・公開まで。1ページ29,800円、最短2営業日で初稿。">
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="styles.css">
+<script src="app.js" defer>
+</script>
+</head>
+<body><a class="skip" href="#main">本文へ</a>
+<header class="site-header"><a class="brand" href="index.html"><span>TANOMATO<span class="brand-dot">.</span></span><small>WEB & DESIGN / HOKKAIDO</small></a>
+<button class="menu-toggle" aria-controls="navigation" aria-expanded="false">メニュー</button>
+<nav id="navigation" aria-label="メインナビゲーション"><a href="services.html" >サービス</a><a href="works.html" >制作例</a><a href="pricing.html" >料金・保守</a><a href="flow.html" >制作の流れ</a><a href="about.html" >TANOMATOについて</a><a class="nav-cta" href="contact.html">無料相談</a>
+</nav>
+</header>
+<main id="main">
+<section class="page-head wrap">
+<p class="eyebrow">CONTACT</p>
+<h1>まずは、話を聞かせてください。</h1>
+<p class="lead">ご相談・見積もりは無料です。分かる範囲でご記入ください。</p>
+</section>
+<section class="wrap editorial">
+<aside>
+<h2>相談時にあると助かる情報</h2>
+<p>つくりたいもの、現在の困りごと、ご希望の時期。参考にしたいサイトがあればURLもお送りください。</p>
+<p>このフォームは入力内容をメール作成画面に引き継ぐ方式です。最後にメール側で送信してください。</p>
+<p class="fine">入力しただけでは送信されません。お問い合わせによって契約が成立することはありません。</p>
+</aside>
+<form id="contact-form">
+<label>お名前 <span>必須</span>
+<input name="name" autocomplete="name" maxlength="100" required>
+</label>
+<label>返信先メール <span>必須</span>
+<input name="email" type="email" autocomplete="email" maxlength="254" required>
+</label>
+<label>会社名・屋号<input name="business" autocomplete="organization" maxlength="100">
+</label>
+<label>ご相談内容<select name="service">
+<option>1ページサイト</option>
+<option>企業サイト</option>
+<option>LP制作</option>
+<option>部分修正・デザイン</option>
+<option>更新・運用</option>
+<option>まだ決まっていない</option>
+</select>
+</label>
+<label>希望時期<input name="timing" placeholder="例：来月中、相談して決めたい" maxlength="100">
+</label>
+<label>詳しい内容 <span>必須</span>
+<textarea name="message" rows="6" maxlength="3000" required placeholder="現在の困りごと、載せたい情報、参考サイトなど">
+</textarea>
+</label>
+<label class="check">
+<input type="checkbox" required><span><a class="" href="privacy.html">個人情報の取り扱い</a>を確認しました。</span>
+</label>
+<button class="button" type="submit">メール内容を確認する</button>
+<section id="mail-review" hidden aria-labelledby="review-title">
+<h3 id="review-title">送信前の確認</h3>
+<pre id="mail-body">
+</pre>
+<div class="actions"><a id="mail-open" class="button">メールアプリで開く</a><a id="gmail-open" class="button outline" target="_blank" rel="noopener noreferrer">Gmailで開く ↗</a>
+<button type="button" id="copy-mail" class="button outline">本文をコピー</button>
+</div>
+<p id="mail-status" role="status">まだ送信されていません。メール作成画面で送信してください。</p>
+</section>
+</form>
+</section>
+</main>
+<section class="closing">
+<div class="wrap">
+<p class="eyebrow">LET'S MAKE IT CLEAR</p>
+<h2>まだ、まとまっていなくても。</h2>
+<p>「こんなことできる？」から聞かせてください。<br>必要なページと、かかる費用を一緒に整理します。</p><a class="button light" href="contact.html">制作について相談する</a>
+</div>
+</section>
+<footer class="wrap">
+<div class="footer-top"><a class="brand" href="index.html"><span>TANOMATO.</span><small>頼むを、まとめる。</small></a>
+<p>札幌・北海道の店舗、小さな事業のWeb制作。<br>ホームページ / LP / サイト修正 / 印刷物デザイン</p>
+</div>
+<nav aria-label="フッターナビゲーション"><a class="" href="services.html">サービス</a><a class="" href="works.html">制作例</a><a class="" href="pricing.html">料金・保守</a><a class="" href="flow.html">制作の流れ</a><a class="" href="about.html">TANOMATOについて</a><a class="" href="contact.html">お問い合わせ</a><a class="" href="privacy.html">個人情報の取り扱い</a>
+</nav><small>© 2026 TANOMATO</small>
+</footer>
+</body>
+</html>
