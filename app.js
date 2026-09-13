@@ -1,4 +1,73 @@
-const toggle=document.querySelector('.menu-toggle');const nav=document.querySelector('#navigation');toggle?.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));nav.classList.toggle('open',open)});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav?.classList.contains('open')){nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.focus()}});
-const recipient="tanomato.admin@gmail.com";const form=document.querySelector('#contact-form');form?.addEventListener('submit',e=>{e.preventDefault();if(!form.reportValidity())return;const d=new FormData(form);const subject='TANOMATOへのご相談：'+d.get('service');const body=['お名前：'+d.get('name'),'返信先：'+d.get('email'),'会社名・屋号：'+d.get('business'),'相談内容：'+d.get('service'),'希望時期：'+d.get('timing'),'','ご相談の詳細：',d.get('message')].join('\n');document.querySelector('#mail-body').textContent=body;document.querySelector('#mail-open').href='mailto:'+recipient+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);document.querySelector('#gmail-open').href='https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(recipient)+'&su='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);document.querySelector('#mail-review').hidden=false;document.querySelector('#mail-review').scrollIntoView({behavior:'smooth',block:'nearest'})});form?.addEventListener('input',()=>{document.querySelector('#mail-review').hidden=true;document.querySelector('#mail-status').textContent='まだ送信されていません。メール作成画面で送信してください。'});document.querySelector('#copy-mail')?.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(document.querySelector('#mail-body').textContent);document.querySelector('#mail-status').textContent='本文をコピーしました。まだ送信されていません。'}catch{document.querySelector('#mail-status').textContent='コピーできませんでした。上の本文を選択してコピーしてください。'}});
+const toggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector("#navigation");
+toggle?.addEventListener("click", () => {
+  const open = toggle.getAttribute("aria-expanded") !== "true";
+  toggle.setAttribute("aria-expanded", String(open));
+  nav.classList.toggle("open", open);
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && nav?.classList.contains("open")) {
+    nav.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.focus();
+  }
+});
+const recipient = "futa.watanabe44@gmail.com";
+const form = document.querySelector("#contact-form");
+form?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (!form.reportValidity()) return;
+  const d = new FormData(form);
+  const subject = "TANOMATOへのご相談：" + d.get("service");
+  const body = [
+    "お名前：" + d.get("name"),
+    "返信先：" + d.get("email"),
+    "会社名・屋号：" + d.get("business"),
+    "相談内容：" + d.get("service"),
+    "希望時期：" + d.get("timing"),
+    "",
+    "ご相談の詳細：",
+    d.get("message"),
+  ].join("\n");
+  document.querySelector("#mail-body").textContent = body;
+  document.querySelector("#mail-open").href =
+    "mailto:" +
+    recipient +
+    "?subject=" +
+    encodeURIComponent(subject) +
+    "&body=" +
+    encodeURIComponent(body);
+  document.querySelector("#gmail-open").href =
+    "https://mail.google.com/mail/?view=cm&fs=1&to=" +
+    encodeURIComponent(recipient) +
+    "&su=" +
+    encodeURIComponent(subject) +
+    "&body=" +
+    encodeURIComponent(body);
+  document.querySelector("#mail-review").hidden = false;
+  document
+    .querySelector("#mail-review")
+    .scrollIntoView({ behavior: "smooth", block: "nearest" });
+});
+form?.addEventListener("input", () => {
+  document.querySelector("#mail-review").hidden = true;
+  document.querySelector("#mail-status").textContent =
+    "まだ送信されていません。メール作成画面で送信してください。";
+});
+document.querySelector("#copy-mail")?.addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(
+      document.querySelector("#mail-body").textContent,
+    );
+    document.querySelector("#mail-status").textContent =
+      "本文をコピーしました。まだ送信されていません。";
+  } catch {
+    document.querySelector("#mail-status").textContent =
+      "コピーできませんでした。上の本文を選択してコピーしてください。";
+  }
+});
 
-const sample=new URLSearchParams(location.search).get('sample');if(sample&&form){form.elements.message.value='参考制作例：'+sample.slice(0,100)+'\n';}
+const sample = new URLSearchParams(location.search).get("sample");
+if (sample && form) {
+  form.elements.message.value = "参考制作例：" + sample.slice(0, 100) + "\n";
+}
