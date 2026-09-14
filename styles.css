@@ -409,5 +409,15 @@ body{background:var(--paper);overflow-x:hidden}
 input,select,textarea{border:2px solid var(--ink);border-radius:12px;box-shadow:3px 3px 0 var(--ink)}
 footer{background:var(--ink);color:#fff;border-top:0}footer .brand-dot{color:var(--yellow)}
 @media(max-width:850px){.studio-hero{min-height:auto}.studio-hero:before{width:150px;height:150px;right:-95px}.hero-outline{border:2px solid var(--ink);padding:28px;transform:none}.site-header nav{background:var(--paper);border-bottom:2px solid var(--ink)}.mobile-actions{background:var(--purple)}.color-ticker div{justify-content:flex-start}.steps li{padding:18px}}
+.principles-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.principle-card{background:#fff;border:2px solid var(--ink);border-radius:22px;padding:32px;box-shadow:6px 6px 0 var(--ink)}
+.principle-card:nth-child(1){border-top:12px solid var(--yellow)}
+.principle-card:nth-child(2){border-top:12px solid var(--pink)}
+.principle-card:nth-child(3){border-top:12px solid var(--mint)}
+.principle-card:nth-child(4){border-top:12px solid var(--blue)}
+.principle-card .number{color:var(--purple);font-size:1rem;font-family:inherit;font-weight:950;opacity:1;margin-bottom:12px}
+.principle-card h3{font-size:1.35rem}
+.principle-card p:last-child{margin-bottom:0}
+@media(max-width:850px){.principles-grid{grid-template-columns:1fr}.principle-card{padding:25px}}
 .operator-line{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:28px;font-size:.9rem}.operator-line b{background:var(--ink);color:#fff;border-radius:999px;padding:6px 13px}.operator-line span{font-weight:700}
 .operator-card{background:var(--yellow);border:2px solid var(--ink);border-radius:28px;padding:38px;box-shadow:9px 9px 0 var(--ink);position:relative;overflow:hidden}.operator-card:after{content:"T";position:absolute;right:-.02em;bottom:-.35em;font-size:12rem;line-height:1;font-weight:950;color:#ffffff80;pointer-events:none}.operator-card h3{font-size:clamp(2rem,4vw,3.5rem);font-weight:950;letter-spacing:-.04em;margin-bottom:20px}.operator-card p{position:relative;z-index:1}.operator-role{color:var(--blue);font-size:.75rem;font-weight:950;letter-spacing:.14em}
