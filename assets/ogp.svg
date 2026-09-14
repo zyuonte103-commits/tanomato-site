@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#fffdf8"/>
+<circle cx="1100" cy="120" r="180" fill="#ffd84d" stroke="#17162b" stroke-width="3"/>
+<rect x="853" y="170" width="290" height="357" rx="24" fill="#17162b"/>
+<rect x="840" y="157" width="290" height="357" rx="24" fill="#7454d6" stroke="#17162b" stroke-width="3"/>
+<g font-family="Yu Gothic, Meiryo, sans-serif" fill="#17162b">
+<text x="65" y="98" font-size="51" font-weight="900">TANOMATO<tspan fill="#ff5d3b">.</tspan></text>
+<text x="67" y="138" font-size="17" letter-spacing="3">WEB &amp; DESIGN / HOKKAIDO</text>
+<rect x="65" y="192" width="390" height="43" rx="21" fill="#ffd84d" stroke="#17162b" stroke-width="2"/>
+<text x="88" y="221" font-size="21" font-weight="700">個人事業主・小さなお店・中小企業へ</text>
+<text x="65" y="315" font-size="62" font-weight="900">お店も、事業も。</text>
+<rect x="63" y="389" width="729" height="18" fill="#ffd84d"/>
+<text x="65" y="398" font-size="57" font-weight="900" fill="#4169e1">伝わるホームページに。</text>
+<text x="68" y="467" font-size="28">文章の整理から、デザイン・公開まで。</text>
+<text x="68" y="545" font-size="24" font-weight="700">制作例・料金・準備ガイドを公開中</text>
+<text x="877" y="260" font-size="47" font-weight="900" fill="#fff">頼む。</text>
+<text x="877" y="333" font-size="42" font-weight="900" fill="#fff">まとまる。</text>
+<text x="877" y="407" font-size="46" font-weight="900" fill="#ffd84d">伝わる。</text>
+<text x="885" y="471" font-size="16" fill="#fff">SAPPORO / ONLINE</text>
+</g><rect y="610" width="1200" height="20" fill="#17162b"/></svg>
