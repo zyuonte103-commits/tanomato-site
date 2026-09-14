@@ -421,3 +421,11 @@ footer{background:var(--ink);color:#fff;border-top:0}footer .brand-dot{color:var
 @media(max-width:850px){.principles-grid{grid-template-columns:1fr}.principle-card{padding:25px}}
 .operator-line{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:28px;font-size:.9rem}.operator-line b{background:var(--ink);color:#fff;border-radius:999px;padding:6px 13px}.operator-line span{font-weight:700}
 .operator-card{background:var(--yellow);border:2px solid var(--ink);border-radius:28px;padding:38px;box-shadow:9px 9px 0 var(--ink);position:relative;overflow:hidden}.operator-card:after{content:"T";position:absolute;right:-.02em;bottom:-.35em;font-size:12rem;line-height:1;font-weight:950;color:#ffffff80;pointer-events:none}.operator-card h3{font-size:clamp(2rem,4vw,3.5rem);font-weight:950;letter-spacing:-.04em;margin-bottom:20px}.operator-card p{position:relative;z-index:1}.operator-role{color:var(--blue);font-size:.75rem;font-weight:950;letter-spacing:.14em}
+
+.legal-meta{font-size:.85rem;opacity:.7;margin-bottom:0}
+.legal-document{padding-top:45px}
+.legal-section{padding:0 0 52px;margin-bottom:52px;border-bottom:2px solid var(--line);scroll-margin-top:110px}
+.legal-section h3{margin-top:32px;margin-bottom:10px}
+.legal-highlight{background:var(--yellow);border:2px solid var(--ink);border-radius:24px;padding:32px;box-shadow:6px 6px 0 var(--ink)}
+.legal-note{background:var(--tint);border-left:6px solid var(--blue);padding:18px 20px}
+@media(max-width:550px){.legal-highlight{padding:22px}.legal-section{padding-bottom:38px;margin-bottom:38px}}
