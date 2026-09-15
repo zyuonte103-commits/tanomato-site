@@ -12,7 +12,7 @@ document.addEventListener("keydown", (e) => {
     toggle.focus();
   }
 });
-const recipient = "futa.watanabe44@gmail.com";
+const recipient = "tanomato.admin@gmail.com";
 const form = document.querySelector("#contact-form");
 form?.addEventListener("submit", (e) => {
   e.preventDefault();
