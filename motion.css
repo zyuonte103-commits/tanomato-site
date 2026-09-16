@@ -1,0 +1,102 @@
+/* Motion layer. Every effect is opt-in through html.motion (set by motion.js),
+   so the site reads the same without JavaScript or with reduced motion. */
+
+/* Cover the page before motion.js runs, so the opening and page wipe never flash content.
+   The fail-safe hides the cover even if the script never loads. */
+html.is-booting::after,html.is-arriving::after{content:"";position:fixed;inset:0;z-index:1000;pointer-events:none;animation:tm-failsafe 0s 2.4s forwards}
+html.is-booting::after{background:var(--yellow)}
+html.is-arriving::after{background:var(--ink)}
+@keyframes tm-failsafe{to{visibility:hidden}}
+
+/* Opening: scattered letters gather into the logo (頼むを、まとめる). */
+.tm-loader{position:fixed;inset:0;z-index:1001;display:grid;place-content:center;justify-items:center;gap:14px;background:var(--yellow);color:var(--ink);clip-path:inset(0);transition:clip-path .75s cubic-bezier(.76,0,.24,1);cursor:pointer;overflow:hidden}
+.tm-loader.is-done{clip-path:inset(0 0 100% 0)}
+.tm-loader__word{display:flex;margin:0;font-size:clamp(3rem,12vw,8.5rem);font-weight:950;letter-spacing:-.04em;line-height:1}
+.tm-loader__word span{display:inline-block;animation:tm-gather .95s cubic-bezier(.34,1.4,.64,1) both;animation-delay:calc(var(--i)*55ms)}
+.tm-loader__word .tm-loader__dot{color:var(--accent);animation:tm-pop .5s cubic-bezier(.34,1.8,.64,1) .8s both}
+.tm-loader__tag{margin:0;font-weight:800;letter-spacing:.25em;opacity:0;animation:tm-fade .5s ease .95s forwards}
+.tm-loader__bar{width:min(220px,50vw);height:6px;border:2px solid var(--ink);border-radius:99px;overflow:hidden}
+.tm-loader__bar i{display:block;height:100%;background:var(--ink);transform-origin:0 50%;animation:tm-grow 1.4s cubic-bezier(.65,0,.35,1) both}
+@keyframes tm-gather{from{opacity:0;translate:var(--x) var(--y);rotate:var(--r);scale:.4}to{opacity:1;translate:0 0;rotate:0deg;scale:1}}
+@keyframes tm-pop{from{scale:0}to{scale:1}}
+@keyframes tm-fade{to{opacity:1}}
+@keyframes tm-grow{from{scale:0 1}to{scale:1 1}}
+
+/* Page wipe: three colored sheets slide over, then away on the next page. */
+.tm-veil{position:fixed;inset:0;z-index:1000;pointer-events:none}
+.tm-veil i{position:absolute;inset:0;translate:0 100%;transition:translate .55s cubic-bezier(.76,0,.24,1)}
+.tm-veil i:nth-child(1){background:var(--yellow)}
+.tm-veil i:nth-child(2){background:var(--pink);transition-delay:.07s}
+.tm-veil i:nth-child(3){background:var(--ink);transition-delay:.14s}
+.tm-veil.is-covering i,.tm-veil.is-covered i{translate:0 0}
+.tm-veil.is-covered i,.tm-veil.is-reset i{transition:none}
+.tm-veil.is-leaving i{translate:0 -100%}
+.tm-veil.is-leaving i:nth-child(1){transition-delay:.14s}
+.tm-veil.is-leaving i:nth-child(3){transition-delay:0s}
+
+/* Scroll reveal. Classes are removed after the entrance so the original hover transitions return. */
+html.motion .tm-reveal{opacity:0;translate:0 40px;rotate:var(--tilt,0deg);transition:opacity .55s ease,translate .85s cubic-bezier(.22,1,.36,1),rotate .85s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--i,0)*70ms)}
+html.motion .tm-reveal.is-in{opacity:1;translate:0 0;rotate:0deg}
+.tm-mark{background:linear-gradient(transparent 64%,#ffd84dcc 64%) no-repeat 0 0/0% 100%;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-size 1s cubic-bezier(.65,0,.35,1) .35s}
+.tm-mark.is-on{background-size:100% 100%}
+
+/* Headline letters drop in one by one. */
+.tm-chars .tm-ch{display:inline-block;animation:tm-drop .8s cubic-bezier(.34,1.5,.64,1) both;animation-delay:calc(var(--i)*32ms)}
+.tm-chars.is-waiting .tm-ch{animation-play-state:paused}
+@keyframes tm-drop{from{opacity:0;translate:0 .7em;rotate:14deg}to{opacity:1;translate:0 0;rotate:0deg}}
+
+/* Statement letters light up as you scroll. */
+.tm-lc{opacity:.22;transition:opacity .25s}
+.tm-lc.on{opacity:1}
+
+/* Scroll progress and hiding header. */
+.tm-progress{position:fixed;left:0;top:0;z-index:25;width:100%;height:4px;background:linear-gradient(90deg,var(--yellow),var(--pink),var(--blue));transform-origin:0 50%;scale:var(--p,0) 1;pointer-events:none}
+html.motion .site-header{transition:translate .4s cubic-bezier(.22,1,.36,1)}
+html.motion .site-header.tm-hidden{translate:0 -105%}
+
+/* Ticker runs, and speeds up or reverses with scrolling. */
+html.motion .color-ticker>div{justify-content:flex-start;gap:28px;width:max-content;min-width:0;padding-inline:0;animation:tm-marquee 32s linear infinite}
+@keyframes tm-marquee{to{translate:calc(-50% - 14px) 0}}
+
+/* Hero: floating pieces, drifting shapes, click confetti. */
+.tm-pieces{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.tm-piece{position:absolute;border:2px solid var(--ink);background:var(--c);translate:calc(var(--px,0)*var(--depth)*1px) calc(var(--py,0)*var(--depth)*1px);transition:translate .6s cubic-bezier(.22,1,.36,1);animation:tm-float var(--fd) ease-in-out infinite alternate}
+.tm-piece.is-circle{border-radius:50%}
+.tm-piece.is-square{border-radius:6px}
+.tm-piece.is-pill{border-radius:99px;height:calc(var(--s)*.45)!important}
+.tm-piece.is-ring{border-radius:50%;background:transparent;border-width:4px;border-color:var(--c)}
+@keyframes tm-float{from{rotate:0deg;scale:1}to{rotate:var(--fr);scale:1.12}}
+html.motion .studio-hero:before{animation:tm-swing 7s ease-in-out infinite alternate}
+html.motion .studio-hero:after{animation:tm-spin 9s ease-in-out infinite alternate}
+@keyframes tm-swing{to{rotate:-28deg;translate:0 14px}}
+@keyframes tm-spin{to{rotate:40deg;translate:10px -12px}}
+.tm-burst{position:fixed;z-index:40;width:12px;height:12px;margin:-6px 0 0 -6px;border:2px solid var(--ink);pointer-events:none}
+
+/* Paper-like cards lean toward the pointer; buttons follow it a little. */
+.tm-tilt{rotate:var(--tr,0deg);transition:rotate .45s cubic-bezier(.22,1,.36,1),transform .2s,box-shadow .2s,border-color .2s}
+.tm-magnet{transition:transform .18s,box-shadow .18s,background .18s,translate .35s cubic-bezier(.22,1,.36,1)}
+html.motion .brand-dot{display:inline-block}
+html.motion .brand:hover .brand-dot{animation:tm-hop .6s cubic-bezier(.34,1.8,.64,1)}
+@keyframes tm-hop{40%{translate:0 -.35em;rotate:-20deg}}
+
+/* Custom cursor for mouse users. Text fields keep the normal caret. */
+html.has-cursor,html.has-cursor *{cursor:none!important}
+html.has-cursor :is(input,textarea,select){cursor:auto!important}
+.tm-cursor,.tm-cursor-dot{position:fixed;left:0;top:0;z-index:1002;pointer-events:none;border-radius:50%}
+.tm-cursor{display:grid;place-items:center;width:40px;height:40px;margin:-20px 0 0 -20px;border:2px solid var(--ink);color:var(--ink);font-size:.72rem;font-weight:900;letter-spacing:.06em;mix-blend-mode:multiply;opacity:0;transition:width .3s cubic-bezier(.22,1,.36,1),height .3s cubic-bezier(.22,1,.36,1),margin .3s cubic-bezier(.22,1,.36,1),background .25s,border-color .25s,opacity .2s,scale .15s}
+.tm-cursor.is-visible{opacity:1}
+.tm-cursor.is-link{width:62px;height:62px;margin:-31px 0 0 -31px;background:var(--yellow)}
+.tm-cursor.is-card{width:86px;height:86px;margin:-43px 0 0 -43px;background:var(--pink)}
+.tm-cursor.is-dark{border-color:#fff;mix-blend-mode:normal;background:transparent}
+.tm-cursor.is-field{opacity:0}
+.tm-cursor.is-press{scale:.82}
+.tm-cursor-dot{width:7px;height:7px;margin:-3.5px 0 0 -3.5px;background:var(--accent)}
+.tm-cursor-dot.is-field{opacity:0}
+
+@media(prefers-reduced-motion:reduce){
+  html.is-booting::after,html.is-arriving::after{display:none}
+}
+@media print{
+  .tm-loader,.tm-veil,.tm-progress,.tm-pieces,.tm-cursor,.tm-cursor-dot{display:none!important}
+  .tm-lc{opacity:1}
+}
