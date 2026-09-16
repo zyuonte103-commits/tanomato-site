@@ -12,7 +12,7 @@ document.addEventListener("keydown", (e) => {
     toggle.focus();
   }
 });
-const recipient = "tanomato.admin@gmail.com";
+const recipient = "contact@tanomato.com";
 const form = document.querySelector("#contact-form");
 form?.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -82,37 +82,6 @@ if (form) {
   for (const id of ["mail-open", "gmail-open"]) {
     document.getElementById(id)?.addEventListener("click", () => window.tanomatoTrack?.("email_compose"));
   }
-}
-
-const config = window.TANOMATO_CONFIG || {};
-const googleFormUrl = window.TanomatoContact.googleUrl(config, context);
-if (googleFormUrl) {
-  const googleSection = document.getElementById("google-contact");
-  if (googleSection) {
-    googleSection.hidden = false;
-    document.getElementById("email-fallback").open = false;
-    const external = document.getElementById("google-form-link");
-    external.href = googleFormUrl;
-    external.addEventListener("click", () => window.tanomatoTrack?.("google_form_open"));
-    document.getElementById("load-google-form").addEventListener("click", (e) => {
-      const frame = document.createElement("iframe");
-      frame.title = "TANOMATOへの無料相談 Googleフォーム";
-      frame.src = window.TanomatoContact.googleUrl(config, context, true);
-      frame.className = "google-contact-frame";
-      frame.referrerPolicy = "no-referrer";
-      frame.addEventListener("load", () => {
-        document.getElementById("google-form-note").textContent = "フォームが表示されない場合は「別タブで開く」をお使いください。末尾の「送信」を押し、Googleフォームの受付完了表示まで確認してください。";
-      });
-      document.getElementById("google-frame-container").replaceChildren(frame);
-      e.currentTarget.hidden = true;
-      document.getElementById("google-form-note").textContent = "フォームを読み込んでいます。表示されない場合は「別タブで開く」または下のメールをご利用ください。";
-      window.tanomatoTrack?.("google_form_open");
-    }, { once: true });
-  }
-  const policy = document.getElementById("privacy-form-mode");
-  if (policy) policy.textContent = "Googleフォームを開くとGoogleに接続します。フォームで送信した氏名・返信先メール・相談内容等はGoogleのサービスを通じて受け付け、TANOMATOがご相談への対応に使用します。Googleの利用規約・プライバシーポリシーも適用されます。代替のメール用入力欄は、メール作成画面への引き継ぎ用です。メール側で送信するまでTANOMATOへ届きません。";
-  const release = document.getElementById("release-form-status");
-  if (release) release.textContent = "Googleフォーム：接続済み。問い合わせページ内、または別タブでフォームを開いて送信できます。メールの代替手段も残しています。";
 }
 
 // Checklists persist only boolean completion states, never contact information.

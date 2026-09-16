@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zyuonte103-commits.github.io/tanomato-site/sitemap.xml
+Sitemap: https://tanomato.com/sitemap.xml

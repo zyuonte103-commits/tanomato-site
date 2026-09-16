@@ -4,7 +4,7 @@
   const measurementId = config.gaMeasurementId || "";
   const configured = /^G-[A-Z0-9]{6,20}$/.test(measurementId);
   const key = "tanomato.analytics-choice.v1";
-  const allowedEvents = new Set(["works_click", "case_click", "sample_open", "compare_click", "compare_use", "guide_click", "checklist_use", "checklist_complete", "checklist_print", "contact_click", "contact_start", "email_compose", "google_form_open"]);
+  const allowedEvents = new Set(["works_click", "case_click", "sample_open", "compare_click", "compare_use", "guide_click", "checklist_use", "checklist_complete", "checklist_print", "contact_click", "contact_start", "email_compose"]);
   let consent = "", loaded = false;
   try { consent = localStorage.getItem(key) || ""; } catch { /* Storage may be disabled. */ }
   window.dataLayer = window.dataLayer || [];
@@ -20,7 +20,7 @@
     gtag("config", measurementId, {
       send_page_view: false, page_location: pageLocation, page_referrer: "",
       allow_google_signals: false, allow_ad_personalization_signals: false,
-      cookie_path: "/tanomato-site/", cookie_domain: "none",
+      cookie_path: "/", cookie_domain: "none",
     });
     gtag("event", "page_view", { page_location: pageLocation, page_referrer: "", page_title: document.title });
     const script = document.createElement("script");
@@ -47,7 +47,7 @@
     document.cookie.split(";").forEach((part) => {
       const name = part.split("=")[0].trim();
       if (!/^_ga(?:_|$)/.test(name)) return;
-      document.cookie = `${name}=; Max-Age=0; path=/tanomato-site/; SameSite=Lax`;
+      document.cookie = `${name}=; Max-Age=0; path=/; SameSite=Lax`;
     });
   }
   banner.addEventListener("click", (e) => {
@@ -82,5 +82,5 @@
   const policy = document.querySelector("#privacy-analytics-mode");
   if (policy) policy.textContent = "許可いただいた場合に限り、Google Analyticsで閲覧・ボタン操作を計測します。氏名・メール・相談内容・URLの追加パラメーターは計測に送りません。Googleの解析用Cookieを使います。選択はページ下部の設定から変更できます。";
   const release = document.querySelector("#release-analytics-status");
-  if (release) release.textContent = "アクセス解析：Google Analyticsに接続済み。許可した訪問者の閲覧・操作を計測します。Googleフォームの送信成功は計測対象外です。";
+  if (release) release.textContent = "アクセス解析：Google Analyticsに接続済み。許可した訪問者の閲覧・操作を計測します。";
 })();

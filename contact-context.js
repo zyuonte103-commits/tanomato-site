@@ -17,18 +17,7 @@
     const lines = [sample && `参考制作例：${sample}`, industry && `業種：${industry}`, plan && `希望プラン：${plan}`].filter(Boolean);
     return { service, sample, industry, plan, message: lines.length ? lines.join("\n") + "\n\n" : "" };
   }
-  function googleUrl(config, context, embedded = false) {
-    let url;
-    try { url = new URL(config.googleFormUrl); } catch { return ""; }
-    if (url.protocol !== "https:" || url.hostname !== "docs.google.com" || !/^\/forms\/d\/e\/[A-Za-z0-9_-]+\/viewform$/.test(url.pathname)) return "";
-    url.search = "";
-    url.hash = "";
-    if (embedded) url.searchParams.set("embedded", "true");
-    if (/^entry\.\d+$/.test(config.googleServiceEntry)) url.searchParams.set(config.googleServiceEntry, context.service);
-    if (/^entry\.\d+$/.test(config.googleMessageEntry) && context.message) url.searchParams.set(config.googleMessageEntry, context.message.trim());
-    return url.href;
-  }
-  const api = { fromSearch, googleUrl };
+  const api = { fromSearch };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.TanomatoContact = api;
 })(typeof window === "undefined" ? globalThis : window);
