@@ -516,3 +516,10 @@ footer{background:var(--ink);color:#fff;border-top:0}footer .brand-dot{color:var
 .plan-summary span{font-size:.82rem;opacity:.85}
 .plan-summary b{font-size:1.25rem;font-weight:900;color:var(--yellow)}
 @media(max-width:550px){.plan-summary{grid-template-columns:1fr}}
+/* Legal notice table (特定商取引法に基づく表記). */
+.law-table-wrap{border:2px solid var(--ink);border-radius:18px;background:#fff;overflow:hidden}
+.law-table{width:100%;border-collapse:collapse}
+.law-table th,.law-table td{padding:16px 18px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;line-height:1.8}
+.law-table th{width:30%;background:var(--tint);font-weight:800;font-size:.92rem}
+.law-table tr:last-child>*{border-bottom:0}
+@media(max-width:550px){.law-table th,.law-table td{display:block;width:auto}.law-table th{border-bottom:0;padding-bottom:6px}.law-table td{padding-top:8px}}
