@@ -493,3 +493,20 @@ footer{background:var(--ink);color:#fff;border-top:0}footer .brand-dot{color:var
 .price-table .price-group th{background:var(--paper);font-size:.8rem;letter-spacing:.12em;color:var(--blue);padding-top:20px}
 .price-table tbody tr:last-child>*{border-bottom:0}
 @media(max-width:550px){.price-table{font-size:.88rem}.price-table thead th{font-size:.72rem;letter-spacing:0}.price-table th,.price-table td{padding:10px 8px}.price-table td.is-member{font-size:.95rem}.price-table tbody th small{font-size:.72rem}}
+/* Monthly support perks shown beside the spot price table. */
+.member-perks{margin:10px 0 34px;padding:32px;border:2px solid var(--ink);border-radius:26px;background:var(--yellow);box-shadow:7px 7px 0 var(--ink)}
+.member-perks-head h3{font-size:clamp(1.35rem,2.4vw,1.9rem);font-weight:950;line-height:1.35;margin-bottom:8px}
+.member-perks-head em{font-style:normal;background:#fff;padding:0 .2em;border-radius:6px;white-space:nowrap}
+.member-perks-head p:not(.eyebrow){margin-bottom:18px}
+.perk-list{list-style:none;counter-reset:perk;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:480px){.perk-list{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:760px){.perk-list{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1000px){.perk-list{grid-template-columns:repeat(5,1fr)}}
+.perk-list li{counter-increment:perk;background:#fff;border:2px solid var(--ink);border-radius:16px;padding:16px 16px 14px;line-height:1.6}
+.perk-list li:before{content:counter(perk,decimal-leading-zero);display:block;font-size:.72rem;font-weight:900;letter-spacing:.12em;color:var(--blue);margin-bottom:4px}
+.perk-list b{display:block;font-size:1rem;margin-bottom:4px}
+.perk-list span{display:block;font-size:.86rem;color:#3b3b52}
+.perk-upgrade{margin:18px 0 0;font-size:.95rem}
+.perk-upgrade b{background:#fff;padding:0 .25em;border-radius:4px}
+.perk-upgrade a{margin-left:.5em;font-weight:800;white-space:nowrap}
+@media(max-width:550px){.member-perks{padding:22px}}
