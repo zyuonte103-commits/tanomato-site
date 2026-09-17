@@ -523,3 +523,6 @@ footer{background:var(--ink);color:#fff;border-top:0}footer .brand-dot{color:var
 .law-table th{width:30%;background:var(--tint);font-weight:800;font-size:.92rem}
 .law-table tr:last-child>*{border-bottom:0}
 @media(max-width:550px){.law-table th,.law-table td{display:block;width:auto}.law-table th{border-bottom:0;padding-bottom:6px}.law-table td{padding-top:8px}}
+
+/* Work screenshots keep their 16:10 frame instead of being cropped to the text height. */
+.work-list img,.editorial>img{height:auto;aspect-ratio:16/10;border:2px solid var(--ink);border-radius:18px}
