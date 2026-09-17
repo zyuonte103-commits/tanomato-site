@@ -84,7 +84,7 @@
     });
     const tag = d.createElement("p");
     tag.className = "tm-loader__tag";
-    tag.textContent = "頼むを、まとめる。";
+    tag.textContent = "頼むを、まとめる";
     const bar = d.createElement("div");
     bar.className = "tm-loader__bar";
     bar.innerHTML = "<i></i>";
