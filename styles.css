@@ -478,3 +478,18 @@ footer{background:var(--ink);color:#fff;border-top:0}footer .brand-dot{color:var
 
 /* Distinct presentation for the company and event sample notes. */
 .case-company-page .case-intro{grid-template-columns:1.2fr .8fr}.case-company-page .case-intro img{order:-1;background:#0c2036;border-radius:0;box-shadow:10px 10px 0 #e35d3f}.case-company-page .case-points{grid-template-columns:1fr;max-width:920px}.case-company-page .case-points article{display:grid;grid-template-columns:90px .55fr 1fr;gap:28px;align-items:start;border-top:1px solid var(--ink)}.case-company-page .case-points .number{font-family:serif;color:#e35d3f}.case-event-page .page-head{width:100%;max-width:none;padding-inline:max(6vw,24px);background:var(--yellow);border-bottom:2px solid var(--ink)}.case-event-page .case-intro{grid-template-columns:.8fr 1.2fr}.case-event-page .case-intro img{border-radius:0;box-shadow:10px 10px 0 var(--pink)}.case-event-page .case-points{gap:18px}.case-event-page .case-points article{border:2px solid var(--ink);padding:28px;box-shadow:5px 5px 0 var(--ink)}.case-event-page .case-points article:nth-child(1){background:var(--yellow)}.case-event-page .case-points article:nth-child(2){background:var(--pink)}.case-event-page .case-points article:nth-child(3){background:var(--mint)}@media(max-width:850px){.case-company-page .case-intro,.case-event-page .case-intro{grid-template-columns:1fr}.case-company-page .case-intro img{order:0}.case-company-page .case-points article{grid-template-columns:55px 1fr}.case-company-page .case-points article p{grid-column:2}}@media(max-width:550px){.case-company-page .case-points article{grid-template-columns:1fr;gap:8px}.case-company-page .case-points article p{grid-column:auto}.case-event-page .case-points article{padding:22px}}
+/* Spot price table: the member column is highlighted so the saving reads at a glance. */
+.price-table-wrap{overflow-x:auto;margin:10px 0 24px;border:2px solid var(--ink);border-radius:22px;background:#fff;box-shadow:7px 7px 0 var(--ink)}
+.price-table{width:100%;border-collapse:collapse}
+.price-table th,.price-table td{padding:14px 18px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+.price-table thead th{font-size:.85rem;letter-spacing:.06em;background:var(--tint)}
+.price-table td{text-align:right;font-weight:800;white-space:nowrap}
+.price-table thead th:not(:first-child){text-align:right;white-space:nowrap}
+.price-table tbody th{font-weight:700}
+.price-table tbody th small{display:block;font-size:.8rem;font-weight:500;opacity:.7}
+.price-table .is-member{background:#fff4c2;color:var(--ink)}
+.price-table thead .is-member{background:var(--yellow)}
+.price-table td.is-member{font-size:1.08rem}
+.price-table .price-group th{background:var(--paper);font-size:.8rem;letter-spacing:.12em;color:var(--blue);padding-top:20px}
+.price-table tbody tr:last-child>*{border-bottom:0}
+@media(max-width:550px){.price-table{font-size:.88rem}.price-table thead th{font-size:.72rem;letter-spacing:0}.price-table th,.price-table td{padding:10px 8px}.price-table td.is-member{font-size:.95rem}.price-table tbody th small{font-size:.72rem}}
