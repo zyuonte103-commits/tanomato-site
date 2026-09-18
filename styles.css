@@ -59,15 +59,86 @@ img{display:block;
 .brand small{display:block;
   font-size:.65rem;
   letter-spacing:.15em}
-.site-header nav{display:flex;
+#navigation{display:flex;
   gap:22px;
-  align-items:center}
-.site-header nav a{text-decoration:none;
-  font-size:.875rem}
-.site-header nav a[aria-current=page]{border-bottom:2px solid}
+  align-items:center;
+  margin-left:auto}
+#navigation a{text-decoration:none;
+  font-size:.875rem;
+  white-space:nowrap}
+#navigation a[aria-current=page]{border-bottom:2px solid}
 .nav-cta{padding:8px 15px;
-  border:1px solid}
-.menu-toggle{display:none}
+  border:1px solid;
+  flex-shrink:0;
+  text-decoration:none;
+  font-size:.875rem;
+  white-space:nowrap}
+.site-header>.nav-cta{margin-left:18px}
+/* ハンバーガーは全ページ・全幅で表示し、サイト内のすべてのページを開く */
+.menu-toggle{display:inline-flex;
+  align-items:center;
+  gap:9px;
+  flex-shrink:0;
+  padding:9px 14px;
+  background:transparent;
+  border:1px solid var(--line);
+  border-radius:999px;
+  color:inherit;
+  font:inherit;
+  font-size:.82rem;
+  font-weight:700;
+  cursor:pointer}
+.menu-toggle__bars{display:grid;
+  gap:3.5px}
+.menu-toggle__bars i{display:block;
+  width:17px;
+  height:2px;
+  border-radius:2px;
+  background:currentColor;
+  transition:transform .25s,opacity .2s}
+.is-menu-open .menu-toggle__bars i:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.is-menu-open .menu-toggle__bars i:nth-child(2){opacity:0}
+.is-menu-open .menu-toggle__bars i:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+.site-menu{position:absolute;
+  left:0;
+  right:0;
+  top:100%;
+  background:var(--paper);
+  border-bottom:1px solid var(--line);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-12px);
+  transition:opacity .2s,transform .25s,visibility .25s}
+.site-menu[data-open=true]{opacity:1;
+  visibility:visible;
+  transform:none}
+.site-menu__inner{display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr)) minmax(220px,.9fr);
+  gap:24px 32px;
+  padding:28px 5% 32px}
+.site-menu__group{display:flex;
+  flex-direction:column;
+  gap:10px}
+.site-menu__title{margin:0 0 4px;
+  font-size:.72rem;
+  font-weight:800;
+  letter-spacing:.12em;
+  color:var(--accent)}
+.site-menu a{text-decoration:none;
+  font-size:.9rem;
+  font-weight:700}
+.site-menu a:hover{opacity:.7}
+.site-menu a[aria-current=page]{color:var(--accent)}
+.site-menu__cta{display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:12px;
+  padding:18px 20px;
+  background:var(--tint);
+  border-radius:16px}
+.site-menu__cta p{margin:0;
+  font-size:.82rem;
+  line-height:1.8}
 .skip{position:absolute;
   top:-100px;
   background:white;
@@ -142,23 +213,40 @@ footer nav{display:flex;
   margin:30px 0}
 footer small{font-size:.8rem}
 .mobile-actions{display:none}
-@media(max-width:850px){.site-header{padding:14px 6%}
-.menu-toggle{display:block;
-  background:transparent;
-  border:1px solid var(--line);
-  padding:8px 12px;
-  color:inherit}
-.site-header nav{display:none;
-  position:absolute;
-  left:0;
-  right:0;
-  top:100%;
-  background:var(--paper);
-  padding:25px 6%;
-  border-bottom:1px solid var(--line);
-  flex-direction:column;
-  align-items:stretch}
-.site-header nav.open{display:flex}
+/* ヘッダー：上のメニューは常に並べたまま、ハンバーガーで全ページを開けるようにする */
+@media(max-width:1000px){.site-header{padding:12px 5% 10px;
+  flex-wrap:wrap;
+  gap:10px 12px}
+#navigation{order:3;
+  flex:1 0 100%;
+  margin-left:0;
+  gap:16px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  padding-bottom:2px;
+  -webkit-mask-image:linear-gradient(90deg,#000 86%,transparent);
+  mask-image:linear-gradient(90deg,#000 86%,transparent)}
+.site-header>.nav-cta{margin-left:auto}
+#navigation::-webkit-scrollbar{display:none}
+#navigation a{font-size:.82rem}
+.nav-cta{padding:6px 13px}
+.menu-toggle{margin-left:0;
+  padding:8px 12px}
+.site-menu__inner{grid-template-columns:1fr;
+  gap:20px;
+  padding:22px 6% 26px}
+@media(max-width:430px){.menu-toggle{padding:9px 11px}
+.menu-toggle__label{position:absolute;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  clip:rect(0 0 0 0);
+  white-space:nowrap}
+.nav-cta{padding:6px 11px;
+  font-size:.8rem}
+.brand span{font-size:1.4rem}}
+}
+@media(max-width:850px){
 .wrap{padding:60px 0}
 .editorial{grid-template-columns:1fr;
   gap:20px}
@@ -342,8 +430,8 @@ pre{white-space:pre-wrap;
   padding:20px}
 #mail-status{margin-top:18px;
   font-size:.9rem}
-@media(max-width:1050px){.site-header nav{gap:14px}
-.site-header nav a{font-size:.8rem}
+@media(max-width:1050px){#navigation{gap:14px}
+#navigation a{font-size:.8rem}
 }
 @media(max-width:850px){.studio-hero{grid-template-columns:1fr;
   gap:15px}
@@ -408,7 +496,7 @@ body{background:var(--paper);overflow-x:hidden}
 .process-list li,.work-list>article{border-top:3px solid var(--ink)}.process-list small{color:var(--accent);font-weight:900}
 input,select,textarea{border:2px solid var(--ink);border-radius:12px;box-shadow:3px 3px 0 var(--ink)}
 footer{background:var(--ink);color:#fff;border-top:0}footer .brand-dot{color:var(--yellow)}
-@media(max-width:850px){.studio-hero{min-height:auto}.studio-hero:before{width:150px;height:150px;right:-95px}.hero-outline{border:2px solid var(--ink);padding:28px;transform:none}.site-header nav{background:var(--paper);border-bottom:2px solid var(--ink)}.mobile-actions{background:var(--purple)}.color-ticker{width:100%;transform:none}.color-ticker div{justify-content:flex-start}.steps li{padding:18px}}
+@media(max-width:850px){.studio-hero{min-height:auto}.studio-hero:before{width:150px;height:150px;right:-95px}.hero-outline{border:2px solid var(--ink);padding:28px;transform:none}.site-menu{border-bottom:2px solid var(--ink);box-shadow:0 8px 0 rgba(23,22,43,.06)}.menu-toggle{border:2px solid var(--ink)}.mobile-actions{background:var(--purple)}.color-ticker{width:100%;transform:none}.color-ticker div{justify-content:flex-start}.steps li{padding:18px}}
 .principles-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
 .principle-card{background:#fff;border:2px solid var(--ink);border-radius:22px;padding:32px;box-shadow:6px 6px 0 var(--ink)}
 .principle-card:nth-child(1){border-top:12px solid var(--yellow)}

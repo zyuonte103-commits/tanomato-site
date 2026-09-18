@@ -1,16 +1,25 @@
+// The links in the header stay visible at every width; this button opens the full list.
 const toggle = document.querySelector(".menu-toggle");
-const nav = document.querySelector("#navigation");
-toggle?.addEventListener("click", () => {
-  const open = toggle.getAttribute("aria-expanded") !== "true";
+const header = document.querySelector(".site-header");
+const siteMenu = document.querySelector("#site-menu");
+const menuOpen = () => siteMenu?.dataset.open === "true";
+function setMenu(open) {
+  if (!siteMenu || !toggle) return;
+  siteMenu.dataset.open = String(open);
   toggle.setAttribute("aria-expanded", String(open));
-  nav.classList.toggle("open", open);
-});
+  header?.classList.toggle("is-menu-open", open);
+}
+toggle?.addEventListener("click", () => setMenu(!menuOpen()));
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && nav?.classList.contains("open")) {
-    nav.classList.remove("open");
-    toggle.setAttribute("aria-expanded", "false");
+  if (e.key === "Escape" && menuOpen()) {
+    setMenu(false);
     toggle.focus();
   }
+});
+document.addEventListener("click", (e) => {
+  if (!menuOpen()) return;
+  if (e.target.closest("#site-menu a")) { setMenu(false); return; }
+  if (!e.target.closest(".site-header")) setMenu(false);
 });
 const recipient = "contact@tanomato.com";
 const form = document.querySelector("#contact-form");
@@ -124,9 +133,4 @@ if (checks.length) {
 }
 
 // Closing the menu after an in-page navigation prevents it obscuring content on mobile.
-nav?.addEventListener("click", (e) => {
-  if (e.target.closest("a") && nav.classList.contains("open")) {
-    nav.classList.remove("open");
-    toggle.setAttribute("aria-expanded", "false");
-  }
-});
+addEventListener("hashchange", () => setMenu(false));

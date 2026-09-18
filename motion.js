@@ -288,7 +288,7 @@
   progress.setAttribute("aria-hidden", "true");
   d.body.append(progress);
   const header = d.querySelector(".site-header");
-  const nav = d.querySelector("#navigation");
+  const siteMenu = d.querySelector("#site-menu");
   let lastY = scrollY;
   let speed = 1;
   let ticking = false;
@@ -306,7 +306,7 @@
     const max = d.documentElement.scrollHeight - vh;
     progress.style.setProperty("--p", max > 0 ? clamp(y / max) : 0);
     if (header) {
-      const keep = nav?.classList.contains("open") || header.contains(d.activeElement);
+      const keep = siteMenu?.dataset.open === "true" || header.contains(d.activeElement);
       header.classList.toggle("tm-hidden", !keep && y > lastY && y > 320);
     }
     const atEnd = y >= max - 2;
