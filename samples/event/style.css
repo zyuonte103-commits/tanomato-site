@@ -78,12 +78,12 @@ button { font: inherit; color: inherit; }
 .veil__mark { width: 70px; height: 70px; fill: var(--ink); opacity: 0; transition: opacity .3s .15s; }
 .veil.is-leaving .veil__mark, .entering .veil__mark { opacity: 1; }
 
-/* ---------- Cursor: a text caret ---------- */
-.cursor__shape { width: 3px; height: 28px; margin: -14px 0 0 -1.5px; border-radius: 2px; background: var(--tomato); animation: blink 1.05s steps(1) infinite; transition: width .35s var(--k-ease), height .35s var(--k-ease), margin .35s var(--k-ease), border-radius .35s, background .3s; }
-.cursor.is-hover .cursor__shape { width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; animation: none; background: var(--ink); box-shadow: 0 0 0 3px var(--marker); }
+/* ---------- Cursor mark (only over clickable things) ---------- */
+.cursor__shape { width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 3px var(--marker); scale: .3; transition: scale .35s var(--pop); }
+.cursor.is-hover .cursor__shape { scale: 1; }
 .cursor__label { padding: 3px 10px; border-radius: 99px; background: var(--ink); color: var(--cream); font-weight: 700; font-size: .72rem; white-space: nowrap; transform: translate(14px, 12px) scale(.6); opacity: 0; transition: opacity .25s, transform .35s var(--pop); }
 .cursor.is-label .cursor__label { opacity: 1; transform: translate(14px, 12px); }
-.cursor.is-down .cursor__shape { transform: scale(.7); }
+.cursor.is-down .cursor__shape { scale: .85; }
 
 /* ---------- Header ---------- */
 .head { position: fixed; top: 12px; left: 12px; right: 12px; z-index: 100; display: flex; align-items: center; gap: 18px; max-width: 1280px; margin-inline: auto; padding: 8px 8px 8px 14px; border: 2px solid var(--ink); border-radius: 99px; background: var(--paper); box-shadow: 4px 4px 0 var(--ink); transition: transform .6s var(--k-ease); }

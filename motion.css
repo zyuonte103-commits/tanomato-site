@@ -79,24 +79,16 @@ html.motion .brand-dot{display:inline-block}
 html.motion .brand:hover .brand-dot{animation:tm-hop .6s cubic-bezier(.34,1.8,.64,1)}
 @keyframes tm-hop{40%{translate:0 -.35em;rotate:-20deg}}
 
-/* Custom cursor for mouse users. Text fields keep the normal caret. */
-html.has-cursor,html.has-cursor *{cursor:none!important}
-html.has-cursor :is(input,textarea,select){cursor:auto!important}
-.tm-cursor,.tm-cursor-dot{position:fixed;left:0;top:0;z-index:1002;pointer-events:none;border-radius:50%}
-.tm-cursor{display:grid;place-items:center;width:40px;height:40px;margin:-20px 0 0 -20px;border:2px solid var(--ink);color:var(--ink);font-size:.72rem;font-weight:900;letter-spacing:.06em;mix-blend-mode:multiply;opacity:0;transition:width .3s cubic-bezier(.22,1,.36,1),height .3s cubic-bezier(.22,1,.36,1),margin .3s cubic-bezier(.22,1,.36,1),background .25s,border-color .25s,opacity .2s,scale .15s}
-.tm-cursor.is-visible{opacity:1}
-.tm-cursor.is-link{width:62px;height:62px;margin:-31px 0 0 -31px;background:var(--yellow)}
-.tm-cursor.is-card{width:86px;height:86px;margin:-43px 0 0 -43px;background:var(--pink)}
-.tm-cursor.is-dark{border-color:#fff;mix-blend-mode:normal;background:transparent}
-.tm-cursor.is-field{opacity:0}
-.tm-cursor.is-press{scale:.82}
-.tm-cursor-dot{width:7px;height:7px;margin:-3.5px 0 0 -3.5px;background:var(--accent)}
-.tm-cursor-dot.is-field{opacity:0}
+/* Cursor mark for mouse users. The real pointer is never hidden, so it cannot look frozen. */
+.tm-cursor{position:fixed;left:0;top:0;z-index:1002;pointer-events:none;display:grid;place-items:center;width:54px;height:54px;margin:-27px 0 0 -27px;border:2px solid var(--ink);border-radius:50%;background:var(--yellow);background:color-mix(in srgb,var(--yellow) 58%,transparent);color:var(--ink);font-size:.72rem;font-weight:900;letter-spacing:.06em;opacity:0;scale:.3;transition:opacity .18s,scale .3s cubic-bezier(.22,1,.36,1),width .3s cubic-bezier(.22,1,.36,1),height .3s cubic-bezier(.22,1,.36,1),margin .3s cubic-bezier(.22,1,.36,1),background .25s}
+.tm-cursor.is-visible{opacity:1;scale:1}
+.tm-cursor.is-card{width:84px;height:84px;margin:-42px 0 0 -42px;background:var(--pink);background:color-mix(in srgb,var(--pink) 62%,transparent)}
+.tm-cursor.is-press{scale:.86}
 
 @media(prefers-reduced-motion:reduce){
   html.is-booting::after,html.is-arriving::after{display:none}
 }
 @media print{
-  .tm-loader,.tm-veil,.tm-progress,.tm-pieces,.tm-cursor,.tm-cursor-dot{display:none!important}
+  .tm-loader,.tm-veil,.tm-progress,.tm-pieces,.tm-cursor{display:none!important}
   .tm-lc{opacity:1}
 }

@@ -52,11 +52,11 @@
 .spot::after { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), var(--k-spot, rgba(255, 255, 255, .14)), transparent 62%); opacity: 0; transition: opacity .5s; }
 .spot:hover::after { opacity: 1; }
 
-/* ---------- Cursor follower (look is set by each site) ---------- */
-.cursor { position: fixed; left: 0; top: 0; z-index: 9800; pointer-events: none; opacity: 0; transition: opacity .35s; }
-.cursor.is-on { opacity: 1; }
+/* ---------- Cursor mark (look is set by each site) ----------
+   Only shown over clickable things; the visitor's own pointer stays visible. */
+.cursor { position: fixed; left: 0; top: 0; z-index: 9800; pointer-events: none; opacity: 0; transition: opacity .25s; }
+.cursor.is-hover { opacity: 1; }
 .cursor__shape, .cursor__label { position: absolute; left: 0; top: 0; }
-.has-cursor body, .has-cursor a, .has-cursor button, .has-cursor summary, .has-cursor [data-cursor] { cursor: none; }
 
 /* ---------- Disclosure ribbon ---------- */
 .sample-ribbon { position: fixed; left: 14px; bottom: 14px; z-index: 9000; display: flex; align-items: center; gap: 10px; max-width: calc(100vw - 28px); padding: 6px 6px 6px 7px; border-radius: 999px; font: 500 12px/1.3 system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Yu Gothic UI", sans-serif; letter-spacing: .02em; color: #fff; text-decoration: none; background: rgba(20, 20, 22, .82); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 10px 30px -12px rgba(0, 0, 0, .55); transition: transform .5s var(--k-ease), background .3s; }

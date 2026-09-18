@@ -324,35 +324,41 @@
       el.addEventListener('pointerleave', () => { el.style.setProperty('--gx', '0px'); el.style.setProperty('--gy', '0px'); });
     });
 
-    /* Cursor follower: the site decides its look with .cursor styles. */
+    /* Cursor mark: shown only over clickable things. The real pointer is never
+       hidden, so a busy frame can never leave the visitor without a pointer. */
     if (root.dataset.cursor) {
       const c = d.createElement('div');
       c.className = 'cursor';
       c.setAttribute('aria-hidden', 'true');
       c.innerHTML = '<span class="cursor__shape"></span><span class="cursor__label"></span>';
       d.body.append(c);
-      root.classList.add('has-cursor');
       const label = c.querySelector('.cursor__label');
-      let mx = -100, my = -100, cx = -100, cy = -100;
+      let mx = -100, my = -100, cx = -100, cy = -100, hovering = false;
+      const place = () => { c.style.transform = `translate3d(${cx.toFixed(1)}px, ${cy.toFixed(1)}px, 0)`; };
       addEventListener('pointermove', (e) => {
         mx = e.clientX; my = e.clientY;
-        c.classList.add('is-on');
+        if (!hovering) { cx = mx; cy = my; }
       }, { passive: true });
       d.addEventListener('pointerover', (e) => {
-        const t = e.target.closest('a, button, [data-cursor], summary, label');
-        const text = t && t.dataset.cursor ? t.dataset.cursor : '';
-        c.classList.toggle('is-hover', !!t);
+        // <html data-cursor="..."> must not count as a clickable target.
+        const t = e.target.closest('a[href], button, summary, label, [role="button"], [data-cursor]:not(html)');
+        const on = !!t && !e.target.closest('input, textarea, select');
+        if (on && !hovering) { cx = mx; cy = my; place(); }
+        hovering = on;
+        const text = on && t.dataset.cursor ? t.dataset.cursor : '';
+        c.classList.toggle('is-hover', on);
         c.classList.toggle('is-label', !!text);
-        c.classList.toggle('is-dark', !!e.target.closest('[data-cursor-dark]'));
         if (text) label.textContent = text;
       });
-      d.documentElement.addEventListener('pointerleave', () => c.classList.remove('is-on'));
+      d.documentElement.addEventListener('pointerleave', () => { hovering = false; c.classList.remove('is-hover'); });
+      addEventListener('blur', () => { hovering = false; c.classList.remove('is-hover', 'is-down'); });
       addEventListener('pointerdown', () => c.classList.add('is-down'));
       addEventListener('pointerup', () => c.classList.remove('is-down'));
       Kit.onTick(() => {
-        cx = lerp(cx, mx, 0.22);
-        cy = lerp(cy, my, 0.22);
-        c.style.transform = `translate3d(${cx.toFixed(1)}px, ${cy.toFixed(1)}px, 0)`;
+        if (!hovering) return;
+        cx = lerp(cx, mx, 0.24);
+        cy = lerp(cy, my, 0.24);
+        place();
       });
     }
   }

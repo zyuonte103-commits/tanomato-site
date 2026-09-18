@@ -403,45 +403,52 @@
     el.addEventListener("pointerleave", () => { el.style.translate = ""; });
   });
 
-  /* ---------- Cursor ---------- */
-  const ring = d.createElement("div");
-  ring.className = "tm-cursor";
-  const dot = d.createElement("div");
-  dot.className = "tm-cursor-dot";
-  [ring, dot].forEach((el) => el.setAttribute("aria-hidden", "true"));
-  d.body.append(ring, dot);
-  root.classList.add("has-cursor");
-  let mx = -100, my = -100, rx = mx, ry = my, moving = false;
+  /* ---------- Cursor mark ----------
+     The real mouse pointer is never hidden. A mark appears only over clickable
+     things, so a busy frame can never leave the visitor without a pointer. */
+  const mark = d.createElement("div");
+  mark.className = "tm-cursor";
+  mark.setAttribute("aria-hidden", "true");
+  d.body.append(mark);
+  const CLICKABLE = "a[href], button, summary, label, [role=button]";
+  let mx = -100, my = -100, cx = mx, cy = my, following = false, raf = 0;
   const follow = () => {
-    rx += (mx - rx) * 0.2;
-    ry += (my - ry) * 0.2;
-    ring.style.transform = `translate3d(${rx}px,${ry}px,0)`;
-    if (Math.abs(mx - rx) + Math.abs(my - ry) > 0.3) requestAnimationFrame(follow);
-    else moving = false;
+    cx += (mx - cx) * 0.24;
+    cy += (my - cy) * 0.24;
+    mark.style.transform = `translate3d(${cx.toFixed(1)}px,${cy.toFixed(1)}px,0)`;
+    raf = following ? requestAnimationFrame(follow) : 0;
+  };
+  const hideMark = () => {
+    if (raf) { cancelAnimationFrame(raf); raf = 0; }
+    following = false;
+    mark.classList.remove("is-visible", "is-card", "is-link", "is-press");
+    mark.textContent = "";
   };
   addEventListener("pointermove", (e) => {
     if (e.pointerType !== "mouse") return;
     mx = e.clientX;
     my = e.clientY;
-    dot.style.transform = `translate3d(${mx}px,${my}px,0)`;
-    ring.classList.add("is-visible");
-    if (!moving) { moving = true; requestAnimationFrame(follow); }
+    if (!following) { cx = mx; cy = my; }
   }, { passive: true });
   d.addEventListener("pointerover", (e) => {
     const t = e.target;
-    const card = t.closest(".work-grid > a, .showcase-main, .showcase-small, .service-card, .audience-card");
-    const link = !card && t.closest("a, button, summary, label, [role=button]");
-    const field = t.closest("input, textarea, select");
-    ring.classList.toggle("is-card", !!card);
-    ring.classList.toggle("is-link", !!link);
-    ring.classList.toggle("is-dark", !card && !!t.closest(".ink, .closing, .metric-strip"));
-    ring.classList.toggle("is-field", !!field);
-    dot.classList.toggle("is-field", !!field);
-    ring.textContent = card ? "見る" : "";
+    if (!t.closest) return;
+    const card = t.closest(`${CARDS}, .showcase-main, .showcase-small`);
+    const link = !card && t.closest(CLICKABLE);
+    if ((!card && !link) || t.closest("input, textarea, select")) { hideMark(); return; }
+    mark.textContent = card ? "見る" : "";
+    mark.classList.toggle("is-card", !!card);
+    mark.classList.toggle("is-link", !!link);
+    mark.classList.add("is-visible");
+    if (!following) {
+      cx = mx; cy = my;
+      mark.style.transform = `translate3d(${cx}px,${cy}px,0)`;
+      following = true;
+      raf = requestAnimationFrame(follow);
+    }
   });
-  d.addEventListener("mouseout", (e) => {
-    if (!e.relatedTarget) ring.classList.remove("is-visible");
-  });
-  addEventListener("pointerdown", () => ring.classList.add("is-press"));
-  addEventListener("pointerup", () => ring.classList.remove("is-press"));
+  d.addEventListener("pointerout", (e) => { if (!e.relatedTarget) hideMark(); });
+  addEventListener("blur", hideMark);
+  addEventListener("pointerdown", () => mark.classList.add("is-press"));
+  addEventListener("pointerup", () => mark.classList.remove("is-press"));
 })();

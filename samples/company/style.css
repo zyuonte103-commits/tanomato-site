@@ -88,13 +88,13 @@ em { font-style: normal; }
 .entering.is-entered .veil i:nth-child(2) { transform: translateY(100%); }
 .entering.is-entered .veil b { transform: scaleX(0); transform-origin: right; transition: transform .5s var(--k-ease); }
 
-/* ---------- Cursor: crosshair ---------- */
-.cursor__shape { width: 36px; height: 36px; margin: -18px 0 0 -18px; transition: transform .5s var(--k-ease); }
+/* ---------- Cursor mark (only over clickable things) ---------- */
+.cursor__shape { width: 44px; height: 44px; margin: -22px 0 0 -22px; border: 1px solid rgba(255, 106, 51, .55); border-radius: 50%; background: rgba(255, 106, 51, .1); scale: .4; transition: scale .4s var(--k-ease); }
 .cursor__shape::before, .cursor__shape::after { content: ""; position: absolute; background: var(--signal); }
-.cursor__shape::before { left: 50%; top: 0; bottom: 0; width: 1px; }
-.cursor__shape::after { top: 50%; left: 0; right: 0; height: 1px; }
-.cursor.is-hover .cursor__shape { transform: rotate(45deg) scale(1.4); }
-.cursor.is-down .cursor__shape { transform: scale(.7); }
+.cursor__shape::before { left: 50%; top: -6px; bottom: -6px; width: 1px; }
+.cursor__shape::after { top: 50%; left: -6px; right: -6px; height: 1px; }
+.cursor.is-hover .cursor__shape { scale: 1; }
+.cursor.is-down .cursor__shape { scale: .82; }
 
 /* ---------- Header ---------- */
 .head { position: fixed; inset: 0 0 auto; z-index: 100; display: flex; align-items: center; gap: clamp(16px, 2.4vw, 36px); padding: 18px var(--gut); color: var(--ink); transition: transform .7s var(--k-ease), color .4s, padding .5s var(--k-ease); }

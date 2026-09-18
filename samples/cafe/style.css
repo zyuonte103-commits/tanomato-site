@@ -61,11 +61,10 @@ ol, ul { padding: 0; list-style: none; }
 .veil.is-leaving .veil__mark, .entering .veil__mark { opacity: 1; animation: spin 1.4s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ---------- Cursor ---------- */
-.cursor { mix-blend-mode: difference; }
-.cursor__shape { width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; border: 1.5px solid #fff; transition: width .55s var(--k-ease), height .55s var(--k-ease), margin .55s var(--k-ease), background .35s, transform .3s; }
-.cursor.is-hover .cursor__shape { width: 58px; height: 58px; margin: -29px 0 0 -29px; background: #fff; }
-.cursor.is-down .cursor__shape { transform: scale(.82); }
+/* ---------- Cursor mark (only over clickable things) ---------- */
+.cursor__shape { width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%; border: 2px solid var(--crema-soft); background: rgba(212, 154, 98, .18); -webkit-backdrop-filter: blur(1px); backdrop-filter: blur(1px); scale: .4; transition: scale .4s var(--k-ease); }
+.cursor.is-hover .cursor__shape { scale: 1; }
+.cursor.is-down .cursor__shape { scale: .85; }
 
 /* ---------- Header ---------- */
 .head { position: fixed; inset: 0 0 auto; z-index: 100; display: flex; align-items: center; gap: clamp(16px, 2.4vw, 32px); padding: 20px var(--gut); transition: transform .8s var(--k-ease), padding .5s var(--k-ease); }
