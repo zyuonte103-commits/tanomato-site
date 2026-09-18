@@ -4,7 +4,7 @@ const {fromSearch} = require('../contact-context.js');
 test('corporate links preserve service and sample; unknown inputs are ignored',()=>{
   assert.equal(fromSearch('?service=企業サイト').service,'企業サイト');
   assert.equal(fromSearch('?sample=NORTHLINE').service,'企業サイト');
-  assert.equal(fromSearch('?sample=発信ラボ').service,'LP制作');
+  assert.equal(fromSearch('?sample=スミカ住設の相談会').service,'LP制作');
   assert.equal(fromSearch('?sample=部分修正・デザイン').service,'サイト修正とデザイン制作');
   assert.deepEqual(fromSearch('?sample=<script>&service=wrong&industry=secret&plan=untrusted'),{service:'まだ決まっていない',sample:'',industry:'',plan:'',message:''});
   assert.equal(fromSearch('?sample=__proto__').sample,'');

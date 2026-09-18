@@ -175,6 +175,7 @@ img{display:block;
 .three-columns{display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:36px}
+.three-columns:has(>:nth-child(4)){grid-template-columns:repeat(2,1fr)}
 .tint{background:var(--tint)}
 .forest{background:var(--ink);
   color:var(--paper)}
@@ -250,7 +251,7 @@ footer small{font-size:.8rem}
 .wrap{padding:60px 0}
 .editorial{grid-template-columns:1fr;
   gap:20px}
-.three-columns{grid-template-columns:1fr}
+.three-columns,.three-columns:has(>:nth-child(4)){grid-template-columns:1fr}
 .two-columns{gap:25px}
 .footer-top{display:block}
 .brand span{font-size:1.4rem}
@@ -614,3 +615,10 @@ footer{background:var(--ink);color:#fff;border-top:0}footer .brand-dot{color:var
 
 /* Work screenshots keep their 16:10 frame instead of being cropped to the text height. */
 .work-list img,.editorial>img{height:auto;aspect-ratio:16/10;border:2px solid var(--ink);border-radius:18px}
+
+.sources{margin:26px 0 18px;padding:18px 20px;border:2px solid var(--ink);border-radius:16px;background:#fff}
+.sources__title{margin:0 0 10px;font-size:.78rem;font-weight:900;letter-spacing:.1em}
+.sources ul{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.sources li{font-size:.82rem;line-height:1.7}
+.sources a{font-weight:800}
+.sources__note{display:block;margin-top:2px;color:#555}

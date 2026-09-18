@@ -1,4 +1,4 @@
-/* はじめての発信ラボ — next session & countdown, stickers, post builder, 90-minute clock. */
+/* スミカ住設 無料相談会 — next session & countdown, stickers, memo builder, 60-minute clock. */
 (() => {
   const K = window.Kit;
   if (!K) return;
@@ -15,8 +15,8 @@
     let y = t.y, m = t.mo;
     for (let i = 0; i < 3; i++) {
       const day = fourthSaturday(y, m);
-      const start = Date.UTC(y, m, day, 5, 0, 0); // 14:00 JST
-      if (start + 90 * 60000 > Date.now()) return { y, m, day, start };
+      const start = Date.UTC(y, m, day, 1, 0, 0); // 10:00 JST
+      if (start + 6 * 3600000 > Date.now()) return { y, m, day, start };
       m += 1;
       if (m > 11) { m = 0; y += 1; }
     }
@@ -27,7 +27,7 @@
     const { y, m, day } = session;
     d.querySelectorAll('[data-next="md"]').forEach((el) => { el.textContent = `${m + 1}.${day}`; });
     d.querySelectorAll('[data-next="dow"]').forEach((el) => { el.textContent = 'SAT'; });
-    d.querySelectorAll('[data-next="full"]').forEach((el) => { el.textContent = `${y}年${m + 1}月${day}日（土）14:00〜15:30`; });
+    d.querySelectorAll('[data-next="full"]').forEach((el) => { el.textContent = `${y}年${m + 1}月${day}日（土）10:00〜16:00`; });
     const cells = {};
     d.querySelectorAll('[data-cd]').forEach((el) => { (cells[el.dataset.cd] ||= []).push(el); });
     const inline = d.querySelectorAll('[data-countdown-inline]');
@@ -124,37 +124,37 @@
     });
   }
 
-  /* ---------- Post builder ---------- */
+  /* ---------- Memo builder ---------- */
   const shops = {
-    bakery: { name: 'こむぎ堂', word: 'BREAD', tag: '#パン屋' },
-    salon: { name: 'hair ひだまり', word: 'HAIR', tag: '#美容室' },
-    body: { name: 'ほぐし整体', word: 'BODY', tag: '#整体' },
+    bath: { name: 'お風呂', word: 'BATH', spec: '浴室（ユニットバスの入れ替え）', cost: '70〜120万円', days: '3〜5日' },
+    kitchen: { name: 'キッチン', word: 'KITCHEN', spec: '台所（システムキッチンの入れ替え）', cost: '60〜150万円', days: '4〜6日' },
+    toilet: { name: 'トイレ', word: 'TOILET', spec: 'トイレ（便器の交換と内装）', cost: '20〜40万円', days: '1〜2日' },
   };
   const who = {
-    family: { open: 'お子さま連れの方へ', close: 'ベビーカーのままでも、ゆっくりどうぞ' },
-    work: { open: 'お仕事帰りの方へ', close: '平日は19時まで開いています' },
-    first: { open: 'はじめての方へ', close: 'わからないことは、なんでも聞いてください' },
+    cold: {
+      bath: '冬はとにかく寒い。タイルもひび割れてきた',
+      kitchen: '古くて、扉の建て付けが悪くなってきた',
+      toilet: '冬は寒く、床の掃除もしにくい',
+    },
+    hard: {
+      bath: 'またぎが高くて、入るのがこわい',
+      kitchen: '作業台が狭く、置き場所が足りない',
+      toilet: '手すりがなく、立ち座りがつらい',
+    },
+    leak: {
+      bath: '床が濡れたままで乾かない。お湯の出も弱い',
+      kitchen: 'シンクの下が湿っていて、においが気になる',
+      toilet: '流れが悪く、たまに水が止まらなくなる',
+    },
   };
   const strength = {
-    craft: {
-      bakery: '毎朝4時から、生地をこねています',
-      salon: 'カラーは、髪の状態を見て一人ずつ調合します',
-      body: '施術の内容は、その日の体に合わせて決めています',
-    },
-    quick: {
-      bakery: '焼きあがりの時間を、店頭の黒板に書き出しています',
-      salon: 'ご予約の方は、ほとんど待たずにご案内できます',
-      body: '予約制なので、待ち時間はほとんどありません',
-    },
-    care: {
-      bakery: 'アレルギーのご相談も、気軽にどうぞ',
-      salon: '仕上がりは、写真を見ながら一緒に決めます',
-      body: 'はじめに20分、じっくりお話をうかがいます',
-    },
+    soon: 'できるだけ早く（1〜2か月以内）',
+    half: '半年以内',
+    later: 'まだ決めていない。話を聞いてから',
   };
   const builder = d.querySelector('.builder');
   if (builder) {
-    const state = { place: 'bakery', who: 'family', strength: 'craft' };
+    const state = { place: 'bath', who: 'cold', strength: 'soon' };
     const names = d.querySelectorAll('[data-post-name]');
     const img = d.querySelector('[data-post-img]');
     const word = d.querySelector('[data-post-word]');
@@ -163,8 +163,7 @@
     let typer = 0;
     const caption = () => {
       const s = shops[state.place];
-      const w = who[state.who];
-      return `${w.open}\n${strength[state.strength][state.place]}\n${w.close}\n${s.tag} #札幌`;
+      return `直したい場所：${s.spec}\n気になること：${who[state.who][state.place]}\n時期：${strength[state.strength]}\n目安：${s.cost}／工事 ${s.days}`;
     };
     const render = (instant) => {
       const s = shops[state.place];
@@ -175,7 +174,7 @@
         img.classList.remove('is-swap'); void img.offsetWidth; img.classList.add('is-swap');
       }
       const full = caption();
-      live.textContent = `${s.name}：${full.replace(/\n/g, '。')}`;
+      live.textContent = `${s.name}の相談メモ。${full.replace(/\n/g, '。')}`;
       clearInterval(typer);
       if (instant || K.reduce) { textEl.textContent = full; return; }
       let i = 0;
@@ -230,9 +229,9 @@
     let last = -1;
     const paint = (p) => {
       if (!wide()) { slots.forEach((s) => s.classList.add('is-active')); return; }
-      const mins = Math.round(K.clamp(p * 1.08) * 90);
+      const mins = Math.round(K.clamp(p * 1.08) * 60);
       if (minutes.textContent !== String(mins)) minutes.textContent = mins;
-      const idx = mins < 20 ? 0 : mins < 50 ? 1 : 2;
+      const idx = mins < 20 ? 0 : mins < 40 ? 1 : 2;
       if (idx === last) return;
       last = idx;
       slots.forEach((s, i) => s.classList.toggle('is-active', i === idx));
@@ -242,11 +241,11 @@
     paint(0);
   }
 
-  /* ---------- Pretend application ---------- */
+  /* ---------- Pretend booking ---------- */
   const toast = d.querySelector('[data-toast]');
   let toastTimer = 0;
   d.querySelectorAll('[data-fake-apply]').forEach((b) => b.addEventListener('click', () => {
-    toast.textContent = 'このイベントは架空の設定のため、申し込みはできません';
+    toast.textContent = 'この相談会は架空の設定のため、予約はできません';
     toast.classList.add('is-on');
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => toast.classList.remove('is-on'), 3200);
