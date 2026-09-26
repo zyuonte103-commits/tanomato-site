@@ -154,7 +154,7 @@
         el.innerHTML = original;
         el.removeAttribute("aria-label");
         el.classList.remove("tm-chars");
-      }, 1000 + i * 55);
+      }, 1200 + i * 72);
     });
   }
   d.querySelectorAll(".studio-hero h1, .page-head h1").forEach(splitHeadline);
@@ -403,52 +403,4 @@
     el.addEventListener("pointerleave", () => { el.style.translate = ""; });
   });
 
-  /* ---------- Cursor mark ----------
-     The real mouse pointer is never hidden. A mark appears only over clickable
-     things, so a busy frame can never leave the visitor without a pointer. */
-  const mark = d.createElement("div");
-  mark.className = "tm-cursor";
-  mark.setAttribute("aria-hidden", "true");
-  d.body.append(mark);
-  const CLICKABLE = "a[href], button, summary, label, [role=button]";
-  let mx = -100, my = -100, cx = mx, cy = my, following = false, raf = 0;
-  const follow = () => {
-    cx += (mx - cx) * 0.24;
-    cy += (my - cy) * 0.24;
-    mark.style.transform = `translate3d(${cx.toFixed(1)}px,${cy.toFixed(1)}px,0)`;
-    raf = following ? requestAnimationFrame(follow) : 0;
-  };
-  const hideMark = () => {
-    if (raf) { cancelAnimationFrame(raf); raf = 0; }
-    following = false;
-    mark.classList.remove("is-visible", "is-card", "is-link", "is-press");
-    mark.textContent = "";
-  };
-  addEventListener("pointermove", (e) => {
-    if (e.pointerType !== "mouse") return;
-    mx = e.clientX;
-    my = e.clientY;
-    if (!following) { cx = mx; cy = my; }
-  }, { passive: true });
-  d.addEventListener("pointerover", (e) => {
-    const t = e.target;
-    if (!t.closest) return;
-    const card = t.closest(`${CARDS}, .showcase-main, .showcase-small`);
-    const link = !card && t.closest(CLICKABLE);
-    if ((!card && !link) || t.closest("input, textarea, select")) { hideMark(); return; }
-    mark.textContent = card ? "見る" : "";
-    mark.classList.toggle("is-card", !!card);
-    mark.classList.toggle("is-link", !!link);
-    mark.classList.add("is-visible");
-    if (!following) {
-      cx = mx; cy = my;
-      mark.style.transform = `translate3d(${cx}px,${cy}px,0)`;
-      following = true;
-      raf = requestAnimationFrame(follow);
-    }
-  });
-  d.addEventListener("pointerout", (e) => { if (!e.relatedTarget) hideMark(); });
-  addEventListener("blur", hideMark);
-  addEventListener("pointerdown", () => mark.classList.add("is-press"));
-  addEventListener("pointerup", () => mark.classList.remove("is-press"));
 })();
