@@ -41,7 +41,7 @@ html.motion .tm-reveal.is-in{opacity:1;translate:0 0;rotate:0deg}
 .tm-mark.is-on{background-size:100% 100%}
 
 /* Headline letters drop in one by one. */
-.tm-chars .tm-ch{display:inline-block;animation:tm-drop .8s cubic-bezier(.34,1.5,.64,1) both;animation-delay:calc(var(--i)*32ms)}
+.tm-chars .tm-ch{display:inline-block;animation:tm-drop .9s cubic-bezier(.34,1.5,.64,1) both;animation-delay:calc(var(--i)*55ms)}
 .tm-chars.is-waiting .tm-ch{animation-play-state:paused}
 @keyframes tm-drop{from{opacity:0;translate:0 .7em;rotate:14deg}to{opacity:1;translate:0 0;rotate:0deg}}
 

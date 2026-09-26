@@ -154,7 +154,7 @@
         el.innerHTML = original;
         el.removeAttribute("aria-label");
         el.classList.remove("tm-chars");
-      }, 850 + i * 32);
+      }, 1000 + i * 55);
     });
   }
   d.querySelectorAll(".studio-hero h1, .page-head h1").forEach(splitHeadline);
