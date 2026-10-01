@@ -42,7 +42,7 @@
   const banner = document.createElement("section");
   banner.className = "analytics-choice";
   banner.setAttribute("aria-label", "アクセス解析の選択");
-  banner.innerHTML = '<p>使いやすさの改善のため、閲覧やボタン操作をGoogle Analyticsで計測してよいですか？相談内容は送信しません。</p><div><button type="button" data-choice="granted">許可する</button><button type="button" data-choice="denied">許可しない</button></div>';
+  banner.innerHTML = '<p>使いやすさの改善のため、閲覧やボタン操作をGoogle Analyticsで計測してよいですか？相談内容は送信しません。どちらを選んでも、ページの見え方や使い方は変わりません。あとから変更できます。</p><div><button type="button" data-choice="granted">許可する</button><button type="button" data-choice="denied">許可しない</button></div>';
   function removeAnalyticsCookies() {
     document.cookie.split(";").forEach((part) => {
       const name = part.split("=")[0].trim();
@@ -65,7 +65,7 @@
       removeAnalyticsCookies();
     }
     banner.hidden = true;
-    settings.focus();
+    settings.focus({ preventScroll: true });
   });
   const settings = document.createElement("button");
   settings.type = "button";
