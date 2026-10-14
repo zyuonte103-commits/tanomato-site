@@ -8,7 +8,7 @@ html.is-booting::after{background:var(--yellow)}
 html.is-arriving::after{background:var(--ink)}
 @keyframes tm-failsafe{to{visibility:hidden}}
 
-/* Opening: scattered letters gather into the logo (頼むを、まとめる). */
+/* Opening: scattered letters gather into the logo (頼みを、まとめる). */
 .tm-loader{position:fixed;inset:0;z-index:1001;display:grid;place-content:center;justify-items:center;gap:14px;background:var(--yellow);color:var(--ink);clip-path:inset(0);transition:clip-path .75s cubic-bezier(.76,0,.24,1);cursor:pointer;overflow:hidden}
 .tm-loader.is-done{clip-path:inset(0 0 100% 0)}
 .tm-loader__word{display:flex;margin:0;font-size:clamp(3rem,12vw,8.5rem);font-weight:950;letter-spacing:-.04em;line-height:1}
