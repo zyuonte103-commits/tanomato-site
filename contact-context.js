@@ -1,6 +1,6 @@
 // Shared allowlists keep arbitrary query-string text out of forms and analytics.
 (function (root) {
-  const services = ["店舗紹介サイト", "企業サイト", "LP制作", "サイト修正とデザイン制作", "更新・運用", "まだ決まっていない"];
+  const services = ["店舗紹介サイト", "企業サイト", "LP制作", "サイト修正とデザイン制作", "リール編集とSNS運用", "更新・運用", "まだ決まっていない"];
   const samples = {
     "余白珈琲": "店舗紹介サイト",
     "NORTHLINE": "企業サイト",
