@@ -13,7 +13,7 @@
     const params = new URLSearchParams(search);
     const sample = Object.hasOwn(samples, params.get("sample")) ? params.get("sample") : "";
     const service = services.includes(params.get("service")) ? params.get("service") : (samples[sample] || "まだ決まっていない");
-    const industry = ["カフェ・飲食店", "小規模企業・個人事業"].includes(params.get("industry")) ? params.get("industry") : "";
+    const industry = ["カフェ・飲食店", "企業・個人事業"].includes(params.get("industry")) ? params.get("industry") : "";
     const plan = params.get("plan") === "完全お任せ店舗紹介サイト" ? params.get("plan") : "";
     const lines = [sample && `参考制作例：${sample}`, industry && `業種：${industry}`, plan && `希望プラン：${plan}`].filter(Boolean);
     return { service, sample, industry, plan, message: lines.length ? lines.join("\n") + "\n\n" : "" };
