@@ -4,7 +4,7 @@
   const measurementId = config.gaMeasurementId || "";
   const configured = /^G-[A-Z0-9]{6,20}$/.test(measurementId);
   const key = "tanomato.analytics-choice.v1";
-  const allowedEvents = new Set(["works_click", "case_click", "sample_open", "compare_click", "compare_use", "guide_click", "checklist_use", "checklist_complete", "checklist_print", "contact_click", "contact_start", "email_compose"]);
+  const allowedEvents = new Set(["works_click", "case_click", "sample_open", "compare_click", "compare_use", "guide_click", "checklist_use", "checklist_complete", "checklist_print", "contact_click", "contact_start", "email_compose", "form_open"]);
   let consent = "", loaded = false;
   try { consent = localStorage.getItem(key) || ""; } catch { /* Storage may be disabled. */ }
   window.dataLayer = window.dataLayer || [];

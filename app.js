@@ -88,6 +88,25 @@ if (form) {
     contextLine.textContent = [context.service, context.sample, context.industry, context.plan].filter(Boolean).join(" / ") + " のご相談";
   }
   form.addEventListener("input", () => window.tanomatoTrack?.("contact_start"), { once: true });
+  // Googleフォームが設定されていれば、それを主な入口にして、選んだ内容を事前入力で引き継ぐ。
+  const cfg = window.TANOMATO_CONFIG?.contactForm;
+  const formCta = document.getElementById("form-cta");
+  const fallback = document.getElementById("email-fallback");
+  if (cfg?.url && formCta && /^https:\/\/docs\.google\.com\/forms\//.test(cfg.url)) {
+    const url = new URL(cfg.url);
+    url.searchParams.set("usp", "pp_url");
+    const prefill = { service: context.service, sample: context.sample, industry: context.industry, plan: context.plan };
+    for (const [key, value] of Object.entries(prefill)) {
+      const id = cfg.entries?.[key];
+      if (id && value) url.searchParams.set("entry." + id, value);
+    }
+    const open = document.getElementById("form-open");
+    open.href = url.href;
+    open.addEventListener("click", () => window.tanomatoTrack?.("form_open"));
+    formCta.hidden = false;
+    fallback.open = false;
+    fallback.querySelector("summary").textContent = "フォームが使えないときは、メールで";
+  }
   for (const id of ["mail-open", "gmail-open"]) {
     document.getElementById(id)?.addEventListener("click", () => window.tanomatoTrack?.("email_compose"));
   }
