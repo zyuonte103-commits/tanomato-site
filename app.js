@@ -151,5 +151,12 @@ if (checks.length) {
   refresh();
 }
 
+// LINE公式アカウントのリンクは、site-config.js に入れたときだけ出す。
+const lineUrl = window.TANOMATO_CONFIG?.social?.line;
+if (lineUrl && /^https:\/\/(lin\.ee|line\.me)\//.test(lineUrl)) {
+  document.querySelectorAll("[data-social-line]").forEach((a) => { a.href = lineUrl; a.hidden = false; });
+  document.querySelectorAll("[data-social-line-text]").forEach((el) => { el.hidden = false; });
+}
+
 // Closing the menu after an in-page navigation prevents it obscuring content on mobile.
 addEventListener("hashchange", () => setMenu(false));
