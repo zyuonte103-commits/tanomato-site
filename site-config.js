@@ -6,7 +6,7 @@ window.TANOMATO_CONFIG = Object.freeze({
   // SNSのアドレス。LINE公式アカウントを作ったら line に lin.ee のアドレスを入れる（空のあいだは出ない）
   social: {
     instagram: "https://www.instagram.com/tanomato.web/",
-    line: "",
+    line: "https://lin.ee/Vdnch7a",
   },
   contactForm: {
     url: "https://docs.google.com/forms/d/e/1FAIpQLSfQfML7TOMw2u8-yZaGBzPEn0cDybhgVFXLZhY7YdSaCKVNKg/viewform",
